@@ -1,0 +1,52 @@
+version: "3.2"
+
+networks:
+  default:
+    external:
+      name: calc-net
+
+services:
+  zookeeper:
+    image: zookeeper
+    restart: always
+  prometheus:
+    image: srinskit/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - type: volume
+        source: prom-volume
+        target: /prom-data
+        volume:
+          nocopy: true
+      - type: bind
+        source: /tmp/metrics-targets
+        target: /tmp/metrics-targets
+        read_only: true
+    depends_on:
+      - zookeeper
+
+  adder:
+    image: srinskit/calc
+    command: -m adder-service
+    depends_on:
+      - zookeeper
+  api-server:
+    image: srinskit/calc
+    command: -m api-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: volume
+        source: calc-volume
+        target: /data
+        volume:
+          nocopy: true
+    depends_on:
+      - zookeeper
+
+volumes:
+  calc-volume:
+    external: true
+  prom-volume:
+    external: true

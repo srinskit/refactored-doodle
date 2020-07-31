@@ -1,0 +1,22 @@
+version: "3.2"
+
+networks:
+  default:
+    external:
+      name: calc-net
+
+services:
+  zookeeper:
+    image: zookeeper
+    restart: always
+  prometheus:
+    image: srinskit/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - type: bind
+        source: /tmp/metrics-targets
+        target: /tmp/metrics-targets
+        read_only: true
+    depends_on:
+      - zookeeper
