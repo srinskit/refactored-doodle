@@ -1,4 +1,22 @@
 # Ansible
+## Ad-hocs
+### Manager node exporters
+```sh
+# Install node exporter
+ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a install"
+
+# Unnstall node exporter
+ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a uninstall"
+
+# Start node exporter
+ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a start"
+
+# Stop node exporter
+ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a stop"
+
+# Check status
+ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a status"
+```
 ## Playbooks
 ### metrics-target-update
 * Updates `/tmp/metrics-targets/node-exporter.json` on all manager nodes with node-exporter targets from inventory group `nodes-with-exporter`
@@ -11,6 +29,8 @@ all:
     ...
   children:
     managers:
+      ...
+    cluster:
       ...
     nodes-with-docker:
       hosts:
