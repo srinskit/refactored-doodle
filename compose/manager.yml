@@ -9,6 +9,7 @@ services:
   zookeeper:
     image: zookeeper
     restart: always
+
   prometheus:
     image: srinskit/prometheus
     ports:
@@ -26,11 +27,25 @@ services:
     depends_on:
       - zookeeper
 
+  grafana:
+    image: srinskit/grafana
+    ports: 
+      - "3000:3000"
+    volumes:
+      - type: volume
+        source: grafana-volume
+        target: /var/lib/grafana
+        volume:
+          nocopy: true
+    depends_on:
+      - prometheus
+
   adder:
     image: srinskit/calc
     command: -m adder-service
     depends_on:
       - zookeeper
+      
   api-server:
     image: srinskit/calc
     command: -m api-server
@@ -49,4 +64,6 @@ volumes:
   calc-volume:
     external: true
   prom-volume:
+    external: true
+  grafana-volume:
     external: true

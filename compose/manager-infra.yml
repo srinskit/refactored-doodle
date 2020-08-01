@@ -9,14 +9,39 @@ services:
   zookeeper:
     image: zookeeper
     restart: always
+  
   prometheus:
     image: srinskit/prometheus
     ports:
       - "9090:9090"
     volumes:
+      - type: volume
+        source: prom-volume
+        target: /prom-data
+        volume:
+          nocopy: true
       - type: bind
         source: /tmp/metrics-targets
         target: /tmp/metrics-targets
         read_only: true
     depends_on:
       - zookeeper
+
+  grafana:
+    image: srinskit/grafana
+    ports: 
+      - "3000:3000"
+    volumes:
+      - type: volume
+        source: grafana-volume
+        target: /var/lib/grafana
+        volume:
+          nocopy: true
+    depends_on:
+      - prometheus
+
+volumes:
+  prom-volume:
+    external: true
+  grafana-volume:
+    external: true
