@@ -1,6 +1,6 @@
 # Ansible
 ## Ad-hocs
-### Manager node exporters
+### Manage node exporters
 ```sh
 # Install node exporter
 ansible cluster -i inventory.yml -m script -a "scripts/node-exporter-manager.sh -a install"
