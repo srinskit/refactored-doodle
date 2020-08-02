@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1596385566180,
+  "iteration": 1596388220583,
   "links": [],
   "panels": [
     {
@@ -410,7 +410,7 @@
       },
       "id": 64,
       "panels": [],
-      "repeat": "instance",
+      "repeat": null,
       "title": "JVM Memory",
       "type": "row"
     },
@@ -1325,8 +1325,8 @@
       },
       "id": 60,
       "panels": [],
-      "repeat": "services",
-      "title": "$services Service Metrics ",
+      "repeat": "service",
+      "title": "$service Service Metrics ",
       "type": "row"
     },
     {
@@ -1375,7 +1375,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(Service_requestCount_total{service=\"$services\"}[1m])) by (service)",
+          "expr": "sum(rate(Service_requestCount_total{service=\"$service\"}[1m])) by (service)",
           "interval": "",
           "legendFormat": "{{service}}",
           "refId": "A"
@@ -3005,7 +3005,7 @@
         "includeAll": true,
         "label": "Service",
         "multi": true,
-        "name": "services",
+        "name": "service",
         "options": [],
         "query": "label_values(service)",
         "refresh": 1,
@@ -3051,5 +3051,5 @@
   "timezone": "",
   "title": "Vertx Application",
   "uid": "BCXHlxVGO",
-  "version": 3
+  "version": 7
 }
