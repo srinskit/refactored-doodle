@@ -11,6 +11,9 @@ docker network create --subnet=<subnet> -d overlay --attachable <network>
 # Volume for Prometheus data
 docker volume create prom-volume
 
+# Volume for grafana data
+docker volume create grafana-volume
+
 # Volume for API-server data
 docker volume create calc-volume
 ```
