@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1596388220583,
+  "iteration": 1596388220620,
   "links": [],
   "panels": [
     {
@@ -131,7 +131,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "No. of  nodes up in $cluster cluster ",
+      "title": "No. of  nodes up in cluster : $cluster ",
       "type": "stat"
     },
     {
@@ -235,7 +235,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "$instance : Process Current  CPU Usage ",
+      "title": "Process Current  CPU Usage : $instance",
       "type": "gauge"
     },
     {
@@ -319,7 +319,7 @@
           "step": 14400
         }
       ],
-      "title": "$instance : Non-Heap used ",
+      "title": "Non-Heap used : $instance  ",
       "type": "stat"
     },
     {
@@ -396,7 +396,7 @@
           "step": 14400
         }
       ],
-      "title": " $instance : Heap used ",
+      "title": " Heap used :  $instance ",
       "type": "stat"
     },
     {
@@ -411,7 +411,7 @@
       "id": 64,
       "panels": [],
       "repeat": null,
-      "title": "JVM Memory",
+      "title": "JVM Memory per instance : $instance",
       "type": "row"
     },
     {
@@ -505,7 +505,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance: JVM Non-Heap",
+      "title": " JVM Non-Heap",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -637,7 +637,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance : JVM Heap",
+      "title": " JVM Heap",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -770,7 +770,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance : JVM Total",
+      "title": " JVM Total",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -825,7 +825,7 @@
       },
       "id": 62,
       "panels": [],
-      "title": "JVM Misc",
+      "title": "JVM Misc per instance : $instance",
       "type": "row"
     },
     {
@@ -908,7 +908,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance: CPU Usage",
+      "title": " CPU Usage",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -1031,7 +1031,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance: Load",
+      "title": "Load",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -1165,7 +1165,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance: Threads",
+      "title": "Threads",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -1277,7 +1277,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$instance: Thread States",
+      "title": "Thread States",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1326,7 +1326,7 @@
       "id": 60,
       "panels": [],
       "repeat": "service",
-      "title": "$service Service Metrics ",
+      "title": "Service Metrics : $service",
       "type": "row"
     },
     {
@@ -1401,7 +1401,8 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "$$hashKey": "object:2135",
+          "format": "ops",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1409,6 +1410,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2136",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1429,11 +1431,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 64
       },
       "id": 36,
       "panels": [],
-      "title": "HTTP Metrics",
+      "title": "HTTP Metrics per Cluster : $cluster",
       "type": "row"
     },
     {
@@ -1454,7 +1456,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 42
+        "y": 65
       },
       "hiddenSeries": false,
       "id": 3,
@@ -1482,7 +1484,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "vertx_http_server_connections",
+          "expr": "sum(vertx_http_server_connections{cluster=\"$cluster\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1510,6 +1512,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2437",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1518,6 +1521,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2438",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1549,7 +1553,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 42
+        "y": 65
       },
       "hiddenSeries": false,
       "id": 4,
@@ -1577,7 +1581,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "round(sum(rate(vertx_http_server_requestCount_total[1m])) by (code), 0.001)",
+          "expr": "round(sum(rate(vertx_http_server_requestCount_total{cluster=\"$cluster\"}[1m])) by (code), 0.001)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1605,6 +1609,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2186",
           "format": "ops",
           "label": null,
           "logBase": 1,
@@ -1613,6 +1618,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2187",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1644,7 +1650,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 42
+        "y": 65
       },
       "hiddenSeries": false,
       "id": 5,
@@ -1672,7 +1678,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "round(sum(rate(vertx_http_server_requestCount_total[1m])) by (code,path), 0.001)",
+          "expr": "round(sum(rate(vertx_http_server_requestCount_total{cluster=\"$cluster\"}[1m])) by (code,path), 0.001)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1722,7 +1728,9 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "1 minute avg latency ": "red"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1739,7 +1747,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 49
+        "y": 72
       },
       "hiddenSeries": false,
       "id": 6,
@@ -1767,7 +1775,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_http_server_responseTime_seconds_sum[1m])) / sum(irate(vertx_http_server_responseTime_seconds_count[1m]))",
+          "expr": "sum(irate(vertx_http_server_responseTime_seconds_sum{cluster=\"$cluster\"}[1m])) / sum(irate(vertx_http_server_responseTime_seconds_count{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1775,7 +1783,7 @@
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_responseTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_responseTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1783,7 +1791,7 @@
           "refId": "D"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_responseTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_responseTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1791,7 +1799,7 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_responseTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_responseTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1799,9 +1807,9 @@
           "refId": "C"
         },
         {
-          "expr": "sum(rate(vertx_http_server_responseTime_seconds_sum[1m])) / sum(rate(vertx_http_server_responseTime_seconds_count[1m]))",
+          "expr": "sum(rate(vertx_http_server_responseTime_seconds_sum{cluster=\"$cluster\"}[1m])) /sum(rate(vertx_http_server_responseTime_seconds_count{cluster=\"$cluster\"}[1m]))",
           "interval": "",
-          "legendFormat": "1 minute latency ",
+          "legendFormat": "1 minute avg latency ",
           "refId": "E"
         }
       ],
@@ -1864,99 +1872,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 49
-      },
-      "hiddenSeries": false,
-      "id": 16,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "rate(vertx_http_server_responseTime_seconds_count{path=\"/add/:x/:y/\",code=\"200\"}[1m])/rate(vertx_http_server_responseTime_seconds_sum{path=\"/add/:x/:y/\",code=\"200\"}[1m])",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throughput",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 49
+        "y": 72
       },
       "hiddenSeries": false,
       "id": 7,
@@ -1984,7 +1900,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_http_server_responseTime_seconds_sum[1m])) by (path) / sum(irate(vertx_http_server_responseTime_seconds_count[1m])) by (path)",
+          "expr": "sum(irate(vertx_http_server_responseTime_seconds_sum{cluster=\"$cluster\"}[1m])) by (path) / sum(irate(vertx_http_server_responseTime_seconds_count{cluster=\"$cluster\"}[1m])) by (path)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1992,15 +1908,17 @@
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_responseTime_seconds_bucket[1m])) by (le,path))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_responseTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le,path))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{path}} [med]",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_responseTime_seconds_bucket[1m])) by (le,path))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_responseTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le,path))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{path}} [99p]",
           "refId": "C"
@@ -2063,9 +1981,109 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 72
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.1",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(vertx_http_server_responseTime_seconds_count{cluster=\"$cluster\",code=\"200\"}[1m]))  by (path) /sum(rate(vertx_http_server_responseTime_seconds_sum{cluster=\"$cluster\",code=\"200\"} [1m])) by ( path) ",
+          "interval": "",
+          "legendFormat": "{{path}} 1miniute avg ",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(irate(vertx_http_server_responseTime_seconds_count{cluster=\"$cluster\",code=\"200\"}[1m]))  by (path) /sum(irate(vertx_http_server_responseTime_seconds_sum{cluster=\"$cluster\",code=\"200\"} [1m])) by (path) ",
+          "interval": "",
+          "legendFormat": "{{path}} 1minute instant ",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Throughput by path",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2286",
+          "format": "ops",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2287",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 79
       },
       "hiddenSeries": false,
       "id": 1,
@@ -2093,7 +2111,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(vertx_http_server_bytesSent_sum[1m])) / sum(rate(vertx_http_server_bytesSent_count[1m]))",
+          "expr": "sum(rate(vertx_http_server_bytesSent_sum{cluster=\"$cluster\"}[1m])) / sum(rate(vertx_http_server_bytesSent_count{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2102,7 +2120,7 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_bytesSent_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_bytesSent_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2111,7 +2129,7 @@
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_bytesSent_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_bytesSent_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2120,9 +2138,10 @@
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_bytesSent_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_bytesSent_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[99p]",
           "refId": "D"
@@ -2188,7 +2207,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 79
       },
       "hiddenSeries": false,
       "id": 14,
@@ -2216,33 +2235,37 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(vertx_http_server_bytesReceived_sum[1m])) / sum(rate(vertx_http_server_bytesReceived_count[1m]))",
+          "expr": "sum(rate(vertx_http_server_bytesReceived_sum{cluster=\"$cluster\"}[1m])) / sum(rate(vertx_http_server_bytesReceived_count{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[avg]",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_bytesReceived_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_http_server_bytesReceived_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[med]",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_bytesReceived_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(vertx_http_server_bytesReceived_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[95p]",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_bytesReceived_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_http_server_bytesReceived_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[99p]",
           "refId": "D"
@@ -2268,6 +2291,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2738",
           "decimals": null,
           "format": "bytes",
           "label": null,
@@ -2277,6 +2301,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2739",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2297,11 +2322,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 86
       },
       "id": 34,
       "panels": [],
-      "title": "Event Bus Metrics",
+      "title": "Event Bus Metrics per Cluster : $cluster",
       "type": "row"
     },
     {
@@ -2322,7 +2347,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 64
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 22,
@@ -2350,7 +2375,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "vertx_eventbus_handlers",
+          "expr": "sum(vertx_eventbus_handlers{cluster=\"$cluster\"}) by (address)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2378,6 +2403,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2789",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2386,6 +2412,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2790",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2418,7 +2445,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 64
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 26,
@@ -2446,7 +2473,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "vertx_eventbus_pending",
+          "expr": "sum(vertx_eventbus_pending{cluster=\"$cluster\"}) by (address)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2474,6 +2501,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2840",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2482,6 +2510,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2841",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2513,7 +2542,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 64
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 24,
@@ -2541,7 +2570,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_eventbus_sent_total[1m]))",
+          "expr": "sum(irate(vertx_eventbus_sent_total{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2549,14 +2578,15 @@
           "refId": "A"
         },
         {
-          "expr": "sum(rate(vertx_eventbus_sent_total[1m]))",
+          "expr": "sum(rate(vertx_eventbus_sent_total{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "1 minute rate",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(vertx_eventbus_sent_total[5m]))",
+          "expr": "sum(rate(vertx_eventbus_sent_total{cluster=\"$cluster\"}[5m])) ",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2584,6 +2614,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2891",
           "format": "ops",
           "label": null,
           "logBase": 1,
@@ -2592,6 +2623,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2892",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2623,7 +2655,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 64
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 28,
@@ -2651,22 +2683,25 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_eventbus_received_total[1m]))",
+          "expr": "sum(irate(vertx_eventbus_received_total {cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "1 minute instant rate",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(vertx_eventbus_received_total[1m]))",
+          "expr": "sum(rate(vertx_eventbus_received_total{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "1 minute rate",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(vertx_eventbus_received_total[5m]))",
+          "expr": "sum(rate(vertx_eventbus_received_total{cluster=\"$cluster\"}[5m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "5 minute rate",
           "refId": "B"
@@ -2692,6 +2727,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2942",
           "format": "ops",
           "label": null,
           "logBase": 1,
@@ -2700,6 +2736,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2943",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2731,7 +2768,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 71
+        "y": 94
       },
       "hiddenSeries": false,
       "id": 30,
@@ -2759,7 +2796,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_eventbus_processingTime_seconds_sum[1m])) / sum(irate(vertx_eventbus_processingTime_seconds_count[1m]))",
+          "expr": "sum(irate(vertx_eventbus_processingTime_seconds_sum{cluster=\"$cluster\"}[1m])) / sum(irate(vertx_eventbus_processingTime_seconds_count{cluster=\"$cluster\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2767,22 +2804,25 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[med]",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[95p]",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "[99p]",
           "refId": "D"
@@ -2808,6 +2848,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2993",
           "format": "s",
           "label": null,
           "logBase": 1,
@@ -2816,6 +2857,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2994",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2847,7 +2889,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 71
+        "y": 94
       },
       "hiddenSeries": false,
       "id": 32,
@@ -2875,7 +2917,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(vertx_eventbus_processingTime_seconds_sum[1m])) by (address) / sum(irate(vertx_eventbus_processingTime_seconds_count[1m])) by (address)",
+          "expr": "sum(irate(vertx_eventbus_processingTime_seconds_sum{cluster=\"$cluster\"}[1m])) by (address) / sum(irate(vertx_eventbus_processingTime_seconds_count{cluster=\"$cluster\"}[1m])) by (address)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -2883,22 +2925,25 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.5, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le,address))",
+          "expr": "histogram_quantile(0.5, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le,address))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{address}} [med]",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le,address))",
+          "expr": "histogram_quantile(0.95, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le, address))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{address}} [95p]",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(vertx_eventbus_processingTime_seconds_bucket[1m])) by (le,address))",
+          "expr": "histogram_quantile(0.99, sum(rate(vertx_eventbus_processingTime_seconds_bucket{cluster=\"$cluster\"}[1m])) by (le,address))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{address}} [99p]",
           "refId": "D"
@@ -2924,6 +2969,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:3044",
           "format": "s",
           "label": null,
           "logBase": 1,
@@ -2932,6 +2978,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:3045",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2946,7 +2993,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -3000,14 +3047,14 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(service)",
+        "definition": "label_values(Service_requestCount_total{cluster=\"$cluster\"},service)",
         "hide": 0,
         "includeAll": true,
         "label": "Service",
         "multi": true,
         "name": "service",
         "options": [],
-        "query": "label_values(service)",
+        "query": "label_values(Service_requestCount_total{cluster=\"$cluster\"},service)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -3021,7 +3068,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -3051,5 +3098,5 @@
   "timezone": "",
   "title": "Vertx Application",
   "uid": "BCXHlxVGO",
-  "version": 7
+  "version": 12
 }
