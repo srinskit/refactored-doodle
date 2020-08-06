@@ -29,12 +29,13 @@ services:
 
   grafana:
     image: srinskit/grafana
-    ports: 
+    ports:
       - "3000:3000"
+    user: "104"
     volumes:
       - type: volume
         source: grafana-volume
-        target: /var/lib/grafana
+        target: /data/grafana
         volume:
           nocopy: true
     depends_on:
@@ -45,12 +46,18 @@ services:
     command: -m adder-service
     depends_on:
       - zookeeper
-      
+
+  divide:
+    image: srinskit/calc
+    command: -m divide-service
+    depends_on:
+      - zookeeper
+
   api-server:
     image: srinskit/calc
     command: -m api-server
     ports:
-      - "8080:8080"
+      - "80:8080"
     volumes:
       - type: volume
         source: calc-volume
