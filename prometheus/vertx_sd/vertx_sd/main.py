@@ -42,7 +42,7 @@ def cmd():
 
 	if args.hazelcast:
 		root = "/discovery/hazelcast"
-		pattern = re.compile(rb'"address":"([\d\.]+)"')
+		pattern = re.compile(rb'"address":"([^"]+)"')
 	else:
 		print("Not implemented")
 		exit(1)
