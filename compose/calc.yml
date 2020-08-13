@@ -1,0 +1,28 @@
+version: "3.2"
+
+networks:
+  default:
+    external:
+      name: calc-net
+
+services:
+  adder:
+    image: srinskit/calc-adder-service
+
+  divider:
+    image: srinskit/calc-divider-service
+
+  api-server:
+    image: srinskit/calc-api-server
+    ports:
+      - "80:8080"
+    volumes:
+      - type: volume
+        source: calc-volume
+        target: /data
+        volume:
+          nocopy: true
+
+volumes:
+  calc-volume:
+    external: true

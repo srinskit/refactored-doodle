@@ -42,20 +42,17 @@ services:
       - prometheus
 
   adder:
-    image: srinskit/calc
-    command: -m adder-service
+    image: srinskit/calc-adder-service
     depends_on:
       - zookeeper
 
-  divide:
-    image: srinskit/calc
-    command: -m divide-service
+  divider:
+    image: srinskit/calc-divider-service
     depends_on:
       - zookeeper
 
   api-server:
-    image: srinskit/calc
-    command: -m api-server
+    image: srinskit/calc-api-server
     ports:
       - "80:8080"
     volumes:
