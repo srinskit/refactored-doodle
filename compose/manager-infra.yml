@@ -42,6 +42,4 @@ services:
 
 volumes:
   prom-volume:
-    external: true
   grafana-volume:
-    external: true
