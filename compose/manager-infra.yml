@@ -9,15 +9,27 @@ services:
   zookeeper:
     image: zookeeper
     restart: always
-  
+
+  vertx_sd:
+    image: srinskit/vertx_sd
+    restart: always
+    volumes:
+      - type: bind
+        source: /tmp/metrics-targets
+        target: /tmp/metrics-targets
+    depends_on:
+      - zookeeper
+
   prometheus:
     image: srinskit/prometheus
+    restart: always
     ports:
       - "9090:9090"
+    user: root
     volumes:
       - type: volume
-        source: prom-volume
-        target: /prom-data
+        source: prometheus-volume
+        target: /prometheus
         volume:
           nocopy: true
       - type: bind
@@ -29,7 +41,9 @@ services:
 
   grafana:
     image: srinskit/grafana
-    ports: 
+    restart: always
+    user: root
+    ports:
       - "3000:3000"
     volumes:
       - type: volume
@@ -41,5 +55,5 @@ services:
       - prometheus
 
 volumes:
-  prom-volume:
+  prometheus-volume:
   grafana-volume:
