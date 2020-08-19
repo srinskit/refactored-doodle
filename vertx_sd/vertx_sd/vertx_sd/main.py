@@ -19,7 +19,6 @@ def cmd():
 	parser.add_argument(
 		'--dst',
 		help='destination file to store targets',
-		default="vertx-targets.json"
 	)
 	parser.add_argument(
 		'--tick',

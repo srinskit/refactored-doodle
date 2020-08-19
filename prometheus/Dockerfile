@@ -1,12 +1,5 @@
-FROM python:3-alpine
+FROM prom/prometheus
 
-RUN apk add --no-cache prometheus tini
-
-COPY vertx_sd vertx_sd
-RUN pip install --no-cache-dir vertx_sd/
-
-COPY startup.sh .
+WORKDIR /etc/prometheus
 COPY prometheus.yml .
 COPY alertrules.yml .
-
-ENTRYPOINT ["tini", "--", "/bin/sh", "startup.sh"]

@@ -38,5 +38,5 @@ scrape_configs:
   - job_name: "vertx"
     file_sd_configs:
       - files:
-          - "vertx-targets.json"
+          - "/tmp/metrics-targets/vertx-targets.json"
         refresh_interval: 1m
