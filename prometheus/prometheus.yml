@@ -40,3 +40,10 @@ scrape_configs:
       - files:
           - "/tmp/metrics-targets/vertx-targets.json"
         refresh_interval: 1m
+    relabel_configs:
+      - source_labels: ['__address__']
+        separator:     ':'
+        regex:         '(.*):.*'
+        target_label:  'instance'
+        replacement:   '${1}'
+
