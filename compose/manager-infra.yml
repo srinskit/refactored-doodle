@@ -11,7 +11,7 @@ services:
     restart: always
 
   vertx_sd:
-    image: srinskit/vertx_sd
+    image: abhiurn/vertx_sd
     restart: always
     volumes:
       - type: bind
@@ -21,11 +21,11 @@ services:
       - zookeeper
 
   prometheus:
-    image: srinskit/prometheus
+    image: abhiurn/prometheus:latest
     restart: always
+    user: root
     ports:
       - "9090:9090"
-    user: root
     volumes:
       - type: volume
         source: prometheus-volume
@@ -38,9 +38,24 @@ services:
         read_only: true
     depends_on:
       - zookeeper
+      - vertx_sd
+ 
+  loki:
+    image: abhiurn/loki:latest
+    ports:
+      - "3100:3100"
+    user: root
+    volumes:
+      - type: volume
+        source: loki-volume
+        target: /data/loki
+        volume:
+          nocopy: true
+    command: -config.file=/usr/share/loki-conf/loki-config.yaml
+    restart: always
 
   grafana:
-    image: srinskit/grafana
+    image: abhiurn/grafana:latest
     restart: always
     user: root
     ports:
@@ -51,9 +66,18 @@ services:
         target: /var/lib/grafana
         volume:
           nocopy: true
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${admin_passwd}
+      - GF_PATHS_CONFIG=/usr/share/grafana-conf/custom.ini
+      - GF_PATHS_DATA=/var/lib/grafana 
+      - GF_PATHS_PROVISIONING=/usr/share/grafana-conf/provisioning 
+
     depends_on:
       - prometheus
+      - loki
 
 volumes:
   prometheus-volume:
   grafana-volume:
+  loki-volume:
