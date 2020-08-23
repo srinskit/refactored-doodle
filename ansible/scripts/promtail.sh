@@ -28,7 +28,7 @@ if [[ $action == "install" ]]; then
 	curl -s  -L $release --output promtail.zip
 	unzip promtail.zip -d $bin_dst
 	mv $bin_dst/promtail-linux-amd64 $bin_dst/$bin
-	cp ../../promtail/promtail-local-config.yaml $config_path
+	cp ../../promtail/conf/promtail-local-config.yaml $config_path
 	mkdir $positions_log_path
 	rm promtail.zip
 	cat > $service_path <<EOF
